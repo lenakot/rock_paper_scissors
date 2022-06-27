@@ -8,6 +8,35 @@
 
 <body>
     <script>
+        function computerPlay() {
+            let actions = ["Rock", "Paper", "Scissors"]
+            let randomNumber = Math.floor(Math.random() * actions.length)
+            return actions[randomNumber]
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection === computerSelection) {
+                console.log('nikto')
+            }
+
+            if (playerSelection === "Rock" && computerSelection === 'Paper') {
+                console.log('comp - win')
+            } else if (playerSelection === "Paper" && computerSelection === 'Rock') {
+                console.log('player - win!')
+            }
+
+            if (playerSelection === "Rock" && computerSelection === 'Scissors') {
+                console.log('player - win!')
+            } else if (playerSelection === "Scissors" && computerSelection === 'Rock') {
+                console.log('comp - win')
+            }
+
+            if (playerSelection === "Scissors" && computerSelection === 'Paper') {
+                console.log('player - win!')
+            } else if (playerSelection === "Paper" && computerSelection === 'Scissors') {
+                console.log('comp - win')
+            }
+        }
 
     </script>
 </body>
