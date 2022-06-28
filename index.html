@@ -8,41 +8,55 @@
 
 <body>
     <script>
+        const PAPER = "paper";
+        const ROCK = "rock";
+        const SCISSORS = "scissors";
         function computerPlay() {
-            let actions = ["Rock", "Paper", "Scissors"]
+            let actions = [PAPER, ROCK, SCISSORS]
             let randomNumber = Math.floor(Math.random() * actions.length)
             return actions[randomNumber]
         }
 
+        let playerScore = 0;
+        let computerScore = 0;
         function playRound(playerSelection, computerSelection) {
-            if (playerSelection === computerSelection) {
-                console.log('nikto')
+            if (playerSelection === ROCK && computerSelection === PAPER) {
+                computerScore++;
+            } else if (playerSelection === PAPER && computerSelection === ROCK) {
+                playerScore++;
             }
 
-            if (playerSelection === "Rock" && computerSelection === 'Paper') {
-                console.log('comp - win')
-            } else if (playerSelection === "Paper" && computerSelection === 'Rock') {
-                console.log('player - win!')
+            if (playerSelection === ROCK && computerSelection === SCISSORS) {
+                playerScore++;
+            } else if (playerSelection === SCISSORS && computerSelection === ROCK) {
+                computerScore++;
             }
 
-            if (playerSelection === "Rock" && computerSelection === 'Scissors') {
-                console.log('player - win!')
-            } else if (playerSelection === "Scissors" && computerSelection === 'Rock') {
-                console.log('comp - win')
-            }
-
-            if (playerSelection === "Scissors" && computerSelection === 'Paper') {
-                console.log('player - win!')
-            } else if (playerSelection === "Paper" && computerSelection === 'Scissors') {
-                console.log('comp - win')
+            if (playerSelection === SCISSORS && computerSelection === PAPER) {
+                playerScore++;
+            } else if (playerSelection === PAPER && computerSelection === SCISSORS) {
+                computerScore++;
             }
         }
 
-        const computerSelection = computerPlay();
-        const playerSelection = "Rock";
-        console.log('playerSelection - ', playerSelection, 'computerSelection - ', computerSelection)
-        // console.log(prompt("Please enter the action from upper letter (Scissors, Paper, Rock)"))
-        console.log(playRound(playerSelection, computerSelection))
+        function game() {
+            const computerSelection = computerPlay();
+            const playerSelection = prompt("Please, enter rock, scissors or paper")
+            console.log(playRound(playerSelection, computerSelection))
+            console.log('playerSelection - ', playerSelection, ' computerSelection - ', computerSelection + '. Score - ' + playerScore + " : " + computerScore)
+        }
+
+        for (let i = 0; i < 5; i++) {
+            game();
+        }
+
+        if (playerScore > computerScore) {
+            console.log('You won! Congratulatulations!')
+        } else if (playerScore === computerScore) {
+            console.log('Draw!')
+        } else {
+            console.log('Computer won!')
+        }
 
     </script>
 </body>
