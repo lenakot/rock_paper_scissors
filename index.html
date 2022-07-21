@@ -7,10 +7,14 @@
 </head>
 
 <body>
+    <button id="paper">paper</button>
+    <button id="rock">rock</button>
+    <button id="scissors">scissors</button>
     <script>
         const PAPER = "paper";
         const ROCK = "rock";
         const SCISSORS = "scissors";
+
         function computerPlay() {
             let actions = [PAPER, ROCK, SCISSORS]
             let randomNumber = Math.floor(Math.random() * actions.length)
@@ -19,7 +23,8 @@
 
         let playerScore = 0;
         let computerScore = 0;
-        function playRound(playerSelection, computerSelection) {
+        function playRound(playerSelection) {
+            let computerSelection = computerPlay()
             if (playerSelection === ROCK && computerSelection === PAPER) {
                 computerScore++;
             } else if (playerSelection === PAPER && computerSelection === ROCK) {
@@ -37,26 +42,35 @@
             } else if (playerSelection === PAPER && computerSelection === SCISSORS) {
                 computerScore++;
             }
+
+            div.innerText = 'Score(P/C) - ' + playerScore + " : " + computerScore
+            console.log('Score(P/C) - ' + playerScore + " : " + computerScore)
+
+            if (playerScore === 5 || computerScore === 5) {
+                setWinner()
+            }
+
         }
 
-        function game() {
-            const computerSelection = computerPlay();
-            const playerSelection = prompt("Please, enter rock, scissors or paper")
-            console.log(playRound(playerSelection, computerSelection))
-            console.log('playerSelection - ', playerSelection, ' computerSelection - ', computerSelection + '. Score - ' + playerScore + " : " + computerScore)
+        function setWinner() {
+            if (playerScore === 5) {
+                div.innerText = 'Score(P/C) - ' + playerScore + " : " + computerScore + " . You won! Congratulatulations!"
+                console.log('You won! Congratulatulations!')
+            } else if (computerScore === 5) {
+                div.innerText = 'Score(P/C) - ' + playerScore + " : " + computerScore + " . Computer won!"
+                console.log('Computer won!')
+            }
         }
 
-        for (let i = 0; i < 5; i++) {
-            game();
-        }
 
-        if (playerScore > computerScore) {
-            console.log('You won! Congratulatulations!')
-        } else if (playerScore === computerScore) {
-            console.log('Draw!')
-        } else {
-            console.log('Computer won!')
-        }
+        const body = document.querySelector('body')
+        let div = document.createElement('div')
+        div.id = 'score'
+        div.innerText = 'Score(P/C) - ' + playerScore + " : " + computerScore
+        body.appendChild(div)
+
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => button.addEventListener('click', () => playRound(button.innerText)))
 
     </script>
 </body>
